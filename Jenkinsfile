@@ -1,10 +1,10 @@
 pipeline {
-	agent { docker { image 'node:14.9.0'}}//want o use image with maven installed in it
+	agent { docker { image 'maven:3.6.3'}}//want o use image with maven installed in it
 	stages{
 		stage('Build') {
 			steps{
-				//sh "mvn --version" //shel script
-				sh 'node --version'
+				sh "mvn --version" //shel script
+				// sh 'node --version'
 				echo "Build"
 			}
 			
