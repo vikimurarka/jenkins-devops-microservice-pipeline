@@ -1,27 +1,21 @@
 pipeline {
-	agent { docker { image 'maven:3.6.3'}}//want o use image with maven installed in it
-	stages{
-		stage('Build') {
-			steps{
-				sh "mvn --version" //shel script
-				// sh 'node --version'
-				echo "Build"
-			}
-			
-		}
-		stage('Test') {
-			steps {
-				echo "Test"
-			}
-		}
+    agent {
+        docker { 
+            image "csanchez/maven:3-jdk-8-nanoserver-1809"
+             args "--entrypoint='' -v C:/Users/muv3kor/.m2:C:/Users/ContainerUser/.m2"
+        }
+    }
+    
 
-		stage('Integeation-Test') {
-			steps {
-				echo "Test"
-			}
-		}
-	} 
-	
+    
+    stages {
+        stage('Test') {
+            steps {
+               //bat "set"
+               bat "mvn clean install"
+            }
+        }
+    }
 	post {
 		//five types of post action "always","success","failure","unstable","changed"
 		always {
